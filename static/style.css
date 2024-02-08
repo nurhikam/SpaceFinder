@@ -1,0 +1,290 @@
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(45deg, #d2001a, #7462ff, #f48e21, #23d5ab);
+    background-size: 300% 300%;
+    animation: color 5s ease-in-out infinite;
+    box-shadow: 0 4px 6px rgba(63, 63, 63, 0.1); /* Shadow effect */
+  }
+  
+  @keyframes color{
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0 50%;
+    }
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6); /* Glass-like transparent background with 60% opacity */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(82, 82, 82, 0.1);
+    text-align: center;
+    color: #ffffff; /* Text color for dark mode */
+    position: relative;
+  }
+  
+  /* Add a dark mode overlay with 20% opacity */
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2); /* Dark mode overlay with 20% opacity */
+    border-radius: 10px;
+    pointer-events: none; /* Make the overlay not intercept pointer events */
+  }
+  
+  .neon-text {
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .status {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #cbc04a;
+    border-radius: 2px;
+  }
+
+  .form-control {
+    margin: 25px 0 5px 0; /* 10px top margin, 200px bottom margin, 0 left and right margins */
+    padding: 10px;
+    background-color: #e9e9e9;
+    border-radius: 2px;
+  }
+
+  
+  .fence {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .parking-area {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .parking-slot {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 6px;
+    cursor: not-allowed; /* Disable cursor for parking slots */
+    pointer-events: none; /* Disable clicks for parking slots */
+    transition: background-color 0.3s;
+  }
+
+  
+  .parking-slot.red {
+    background-color: #de6565; /* Merah */
+  }
+
+  .parking-slot.default {
+      background-color: #4edb95; /* Warna default */
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  #time{
+    display: flex;
+    gap: 40px;
+    color: #474747;
+    justify-content: center;
+}
+
+#time .circle{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#time .circle svg{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform: rotate(270deg);
+}
+#time .circle svg circle{
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke: #ffffff;
+    stroke-width: 4;
+    transform: translate(5px, 5px);
+}
+#time .circle svg circle:nth-child(2){
+    stroke: var(--clr);
+    stroke-dasharray: 440;
+}
+
+#time div{
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 2rem;
+}
+
+#time div span{
+    position: absolute;
+    transform: translateX(-50%) translateY(10%);
+    font-weight: 200;
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+#time .ap{
+    position: relative;
+    font-size: 1rem!important;
+}
+
+.dots{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+.dots::before{
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 15px;
+    height: 15px;
+    background: var(--clr);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--clr), 0 0 60px var(--clr);
+}
+
+/* Gaya untuk modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* styles.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  font-size: px;
+  margin-bottom: 5px;
+  color: #464646;
+}
+
+.form-control {
+  width: 100%;
+  max-width: 150px;
+  padding: 1;
+  border: 1px solid #383838;
+  color: #474747;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* You can add more styles as needed */

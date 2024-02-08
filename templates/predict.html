@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PARKIR</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script
+      src="{{ url_for('static', filename='app.js') }}"
+      type="module"
+    ></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.js') }}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="neon-text">PARKIR</h1>
+      <div id="time">
+        <div class="circle" style="--clr: #29f1ff">
+          <div class="dots hr_dot"></div>
+          <svg>
+            <circle cx="70" cy="70" r="70"></circle>
+            <circle cx="70" cy="70" r="70" id="hh"></circle>
+          </svg>
+          <div id="hours">00</div>
+        </div>
+        <div class="circle" style="--clr: #2afe00">
+          <div class="dots min_dot"></div>
+          <svg>
+            <circle cx="70" cy="70" r="70"></circle>
+            <circle cx="70" cy="70" r="70" id="mm"></circle>
+          </svg>
+          <div id="minutes">00</div>
+        </div>
+        <div class="circle" style="--clr: #ff4d00">
+          <div class="dots sec_dot"></div>
+          <svg>
+            <circle cx="70" cy="70" r="70"></circle>
+            <circle cx="70" cy="70" r="70" id="ss"></circle>
+          </svg>
+          <div id="seconds">00</div>
+        </div>
+        <div class="ap">
+          <div id="am-pm">AM</div>
+        </div>
+      </div>
+
+      <div class="status" id="parkingStatus">Status Parkir: Loading...</div>
+      <div class="fence">
+        <div class="parking-area">
+          <div class="parking-slot" id="slot1">Slot 1: Loading...</div>
+          <div class="parking-slot" id="slot2">Slot 2: Loading...</div>
+          <div class="parking-slot" id="slot3">Slot 3: Loading...</div>
+          <div class="parking-slot" id="slot4">Slot 4: Loading...</div>
+          <div class="parking-slot" id="slot5">Slot 5: Loading...</div>
+          <div class="parking-slot" id="slot6">Slot 6: Loading...</div>
+          <div class="parking-slot" id="slot7">Slot 7: Loading...</div>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <form action="/predict" method="post" class="col-md-6 offset-md-3" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+            
+          <label for="time" class="form-label">Masukan waktu:</label>
+          <input type="time" id="time" name="time" class="form-control" required>
+          
+          <label for="time" class="form-label">Pilih Hari:</label>
+          <select id="day" name="day" class="form-control">
+              <option value="1">Senin</option>
+              <option value="2">Selasa</option>
+              <option value="3">Rabu</option>
+              <option value="4">Kamis</option>
+              <option value="5">Jum'at</option>
+              <option value="6">Sabtu</option>
+              <option value="7">Minggu</option>
+          </select>
+            <input type="submit" value="Prediksi" class="btn btn-primary">
+        </form>
+    </div>
+
+      <button onclick="resetPredict()">Reset Prediksi</button>
+      
+
+      <script>
+    
+        function resetPredict() {
+            // Memuat ulang halaman
+            location.reload();
+        }
+    </script>
+
+
+
+    <script>
+      setInterval(() => {
+        let hours = document.getElementById("hours");
+        let minutes = document.getElementById("minutes");
+        let seconds = document.getElementById("seconds");
+        let ampm = document.getElementById("am-pm");
+
+        let hh = document.getElementById("hh");
+        let mm = document.getElementById("mm");
+        let ss = document.getElementById("ss");
+
+        let hr_dot = document.querySelector(".hr_dot");
+        let min_dot = document.querySelector(".min_dot");
+        let sec_dot = document.querySelector(".sec_dot");
+
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        let am = h >= 12 ? "PM" : "AM";
+
+        // converting 24hr to 12hr format
+        if (h > 12) {
+          h = h - 12;
+        }
+
+        // adding zero before a single-digit number
+        h = h < 10 ? "0" + h : h;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        hours.innerHTML = h + "<br><span>Hours</span>";
+        minutes.innerHTML = m + "<br><span>Minutes</span>";
+        seconds.innerHTML = s + "<br><span>Seconds</span>";
+        ampm.innerHTML = am;
+
+        // 12 hrs clock
+        hh.style.strokeDashoffset = 440 - (440 * h) / 12;
+        // 60 minutes
+        mm.style.strokeDashoffset = 440 - (440 * m) / 60;
+        // 60 seconds
+        ss.style.strokeDashoffset = 440 - (440 * s) / 60;
+
+        // 360 / 12 = 30
+        hr_dot.style.transform = `rotate(${h * 30}deg)`;
+        // 360 / 60 = 6
+        min_dot.style.transform = `rotate(${m * 6}deg)`;
+        // 360 / 60 = 6
+        sec_dot.style.transform = `rotate(${s * 6}deg)`;
+      });
+    </script>
+  </body>
+</html>
